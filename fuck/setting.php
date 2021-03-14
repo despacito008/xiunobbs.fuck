@@ -248,7 +248,7 @@ if(this.readyState===4 && this.status===200){
 var json=JSON.parse(this.responseText);
 for(var i=0;i<json.length;i++){
 var tobj=new Date(parseInt(json[i].time));
-document.querySelector(\'#fuck_trash\').innerHTML+=\'<div><a href="../?user-\'+json[i].user+\'.htm" target="_blank">[\'+tobj.getFullYear()+\'-\'+tobj.getMonth()+\'-\'+tobj.getDate()+\']</a> <a href="../upload/attach/\'+json[i].date+\'/\'+json[i].user+\'_\'+json[i].time+\'.\'+json[i].type+\'" target="_blank">\'+(json[i].size/1048576).toFixed(2)+\' MB (\'+json[i].type+\')</a></div>\';
+document.querySelector(\'#fuck_trash\').innerHTML+=\'<div><a href="../?user-\'+json[i].user+\'.htm" target="_blank">[\'+tobj.getFullYear()+\'-\'+(tobj.getMonth()+1)+\'-\'+tobj.getDate()+\']</a> <a href="../upload/attach/\'+json[i].date+\'/\'+json[i].user+\'_\'+json[i].time+\'.\'+json[i].type+\'" target="_blank">\'+(json[i].size/1048576).toFixed(2)+\' MB (\'+json[i].type+\')</a></div>\';
 }
 };
 };
