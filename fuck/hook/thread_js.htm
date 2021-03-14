@@ -1,0 +1,43 @@
+<?php //assbbs.com
+echo '
+<script>
+var fuck_tid='.$thread['tid'].';
+var fuck_page='.$page.';
+var fuck_advanced=document.querySelector(\'#advanced_reply\');
+var fuck_quotepid=document.querySelector(\'input[name="quotepid"]\');
+'.(empty($fuck['keeptext'])?'':'
+if(fuck_advanced){
+fuck_advanced.setAttribute(\'href\',\'javascript:;\');
+fuck_advanced.setAttribute(\'onclick\',\'window.location.href=\\\'./?post-create-\\\'+fuck_tid+\\\'-0-\\\'+fuck_quotepid.value+\\\'.htm#\\\'+encodeURIComponent(document.querySelector(\\\'#message\\\').value);\');
+if(fuck_quotepid){new MutationObserver(function(){fuck_advanced.href=\'javascript:;\';}).observe(fuck_quotepid,{attributes:true});};
+};
+').'
+'.(empty($fuck['jumplast'])?'':'
+if(document.querySelector(\'#newfloor\')){
+new MutationObserver(function(){
+var fuck_last=new XMLHttpRequest();
+fuck_last.open(\'GET\',\'./?fuck_jump&shit=\'+fuck_tid+\'&time=\'+Date.parse(new Date()),true);
+fuck_last.onreadystatechange=function(){
+if(this.readyState===4 && this.status===200 && !isNaN(this.responseText) && this.responseText>0 && this.responseText!=fuck_page){
+window.location.href=xn.url(\'thread-\'+fuck_tid+\'-\'+this.responseText)+\'#jumplast\';
+};
+};
+fuck_last.send(null);
+}).observe(document.querySelector(\'#newfloor\'),{childList:true,characterData:true});
+};
+if(window.location.hash==\'#jumplast\'){
+window.addEventListener(\'load\',function(){
+var fuck_jump=document.getElementsByClassName(\'post\');
+if(fuck_jump.item(fuck_jump.length-2)){$(window).scrollTop($(fuck_jump.item(fuck_jump.length-2)).offset().top);};
+});
+};
+').'
+</script>
+'.(empty($fuck['prism'])?'':'
+<script>$(\'.message pre[class^=language-]\').addClass(\'line-numbers\');</script>
+<script src="'.$fuck['prism'].'/components/prism-core.min.js"></script>
+<script src="'.$fuck['prism'].'/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="'.$fuck['prism'].'/plugins/line-numbers/prism-line-numbers.min.js"></script>
+').'
+';
+?>

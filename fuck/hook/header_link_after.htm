@@ -1,0 +1,12 @@
+<?php //assbbs.com
+echo '
+<style>
+'.(empty($fuck['tidyicon'])?'':'.tox-tbtn{height:28px !important;}.tox-tbtn:not(.tox-tbtn--select):not(.tox-split-button__chevron){width:28px !important;}.tox-tbtn__select-chevron,tox-split-button__chevron{width:14px !important;}.tox-tbtn__select-label{width:auto !important;}.tox-menubar,.tox-toolbar,.tox-toolbar__overflow,.tox-toolbar__primary{background:url("data:image/svg+xml;charset=utf8,%3Csvg height=\'33px\' viewBox=\'0 0 40 33px\' width=\'40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'0\' y=\'32px\' width=\'100\' height=\'1\' fill=\'%23cccccc\'/%3E%3C/svg%3E") left 0 top 0 #fff !important;}').'
+'.(empty($fuck['outer_style'])?'':$fuck['outer_style']).'
+</style>
+'.((empty($fuck['prism']) || $route!='thread')?'':'
+<link rel="stylesheet" href="'.$fuck['prism'].'/themes/prism-tomorrow.css" />
+<link rel="stylesheet" href="'.$fuck['prism'].'/plugins/line-numbers/prism-line-numbers.css" />
+').'
+';
+?>

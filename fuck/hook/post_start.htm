@@ -1,0 +1,5 @@
+<?php //assbbs.com
+if(!empty($fuck['tinymce']) && $route=='post' && $action=='update' && !empty($post['doctype'])){$form_message='<p>'.str_replace(array("\r\n","\r","\n"),'</p><p>',str_replace("\t",'&nbsp;&nbsp;&nbsp;&nbsp;',htmlspecialchars($post['message']))).'</p>';}
+if(!empty($fuck['jumplast']) && $route=='post' && $action=='create'){$location='./?fuck_jump&suck&shit='.$thread['tid'].'&time='.time();}
+if(!empty($fuck['jumpedit']) && $route=='post' && $action=='update' && !empty($_SERVER['HTTP_REFERER'])){$location=$_SERVER['HTTP_REFERER'];}
+?>

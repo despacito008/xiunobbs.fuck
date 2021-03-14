@@ -1,0 +1,10 @@
+{
+    "name": "FUCK",
+    "brief": "更好的编辑器·基于TinyMCE",
+    "version": "2021.03.15",
+    "bbs_version": "4.0",
+    "installed": 0,
+    "enable": 1,
+    "hooks_rank": [],
+    "dependencies": []
+}

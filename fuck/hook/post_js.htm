@@ -1,0 +1,92 @@
+<?php //assbbs.com
+echo '
+<script>
+var fuck_edit=document.querySelector(\'#message\');
+$(\'form\').unbind(\'keyup\').keydown(function(e){if(e.ctrlKey && e.keyCode==13){document.getElementById(\'submit\').click();};});
+if(window.location.hash && !fuck_edit.value){fuck_edit.value=decodeURIComponent(window.location.hash.substr(1));'.(empty($fuck['tinymce'])?'':'fuck_edit.value=\'<p>\'+fuck_edit.value.replace(/(\\r\\n)|(\\n)|(\\r)/g,\'</p><p>\')+\'</p>\';').'};
+</script>
+'.(empty($fuck['tinymce'])?'':'
+<script>
+var fuck_image_use=JSON.parse(\''.json_encode($fuck['image_use']).'\');
+var fuck_video_use=JSON.parse(\''.json_encode($fuck['video_use']).'\');
+var fuck_audio_use=JSON.parse(\''.json_encode($fuck['audio_use']).'\');
+var fuck_image_size='.(empty($fuck[G('gid').'_image_size'])?0:$fuck[G('gid').'_image_size'].'*1048576').';
+var fuck_media_size='.(empty($fuck[G('gid').'_media_size'])?0:$fuck[G('gid').'_media_size'].'*1048576').';
+var fuck_file_size='.(empty($fuck[G('gid').'_file_size'])?0:$fuck[G('gid').'_file_size'].'*1048576').';
+var fuck_image_test='.(empty($fuck[G('gid').'_image_amount'])?0:1).';
+var fuck_media_test='.(empty($fuck[G('gid').'_media_amount'])?0:1).';
+var fuck_file_test='.(empty($fuck[G('gid').'_file_amount'])?1:1).';
+var fuck_rape='.(empty($fuck['rape'])?'null':'{'.$fuck['rape'].'}').';
+window.addEventListener(\'load\',function(){
+tinymce.init({
+language_url:\'plugin/fuck/tinymce.cn.js\',
+language:\'cn\',
+selector:\'textarea\',
+plugins:\''.(empty($fuck['plugins'])?'code codesample hr image link media paste table wordcount':$fuck['plugins']).'\',
+toolbar:\''.(empty($fuck['toolbar'])?'undo redo code removeformat align bold italic underline strikethrough forecolor backcolor fontsizeselect image media link unlink hr codesample table':$fuck['toolbar']).'\',
+content_style:\''.(empty($fuck['inner_style'])?'':str_replace(array("\r\n","\r","\n"),' ',$fuck['inner_style'])).'\',
+fontsize_formats:\'12px 14px 15px 16px 18px 36px 72px\',
+resize:true,
+menubar:false,
+contextmenu:false,
+elementpath:false,
+default_link_target:\'_blank\',
+paste_data_images:true,
+image_uploadtab:false,
+images_upload_handler:fuck_clip,
+file_picker_types:((fuck_image_size&&Object.keys(fuck_image_use).length)?\'image \':\'\')+((fuck_media_size&&(Object.keys(fuck_video_use).length||Object.keys(fuck_audio_use).length))?\'media \':\'\')+((fuck_file_size&&Object.keys(fuck_file_use).length)?\'file \':\'\')+\'fuck\',
+file_picker_callback:fuck_file,
+media_alt_source:false,
+media_poster:false,
+video_template_callback:fuck_mediahtml,
+audio_template_callback:fuck_mediahtml,
+setup:function(editor){
+'.(empty($fuck['noautowh'])?'':'
+editor.on(\'OpenWindow\',function(e){
+var lock=document.querySelector(\'.tox-lock\');
+if(lock){
+var height_input=lock.parentNode.previousElementSibling.querySelector(\'input\');
+var width_input=lock.parentNode.previousElementSibling.previousElementSibling.querySelector(\'input\');
+var getter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,\'value\').get;
+var setter=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,\'value\').set;
+var srcurl=lock.parentNode.parentNode.parentNode.parentNode.querySelector(\'input[type="url"]\');
+var raito=0;if(width_input.value && height_input.value){raito=width_input.value/height_input.value;}
+Object.defineProperty(width_input,\'value\',{set(val){},get(){return getter.call(this);}});
+Object.defineProperty(height_input,\'value\',{set(val){},get(){return getter.call(this);}});
+srcurl.addEventListener(\'input\',function(){setter.call(width_input,\'\');setter.call(height_input,\'\');raito=0;});
+width_input.addEventListener(\'input\',function(){if(raito && document.querySelector(\'.tox-locked\')){setter.call(height_input,(getter.call(width_input)/raito).toFixed());};});
+height_input.addEventListener(\'input\',function(){if(raito && document.querySelector(\'.tox-locked\')){setter.call(width_input,(getter.call(height_input)*raito).toFixed());};});
+};
+});
+').'
+editor.on(\'input\',function(){
+editor.save();
+});
+editor.on(\'change\',function(){
+editor.save();
+});
+editor.on(\'drop\',function(e){
+e.preventDefault();
+e.stopPropagation();
+});
+editor.on(\'keydown\',function(e){
+if(!e.ctrlKey || e.keyCode!=13){return;};
+e.preventDefault();
+e.stopPropagation();
+document.getElementById(\'submit\').click();
+});
+editor.on(\'load\',function(){
+document.querySelector(\'input[name="doctype"]\').value=0;
+if(!document.querySelector(\'#fuck_info\')){document.querySelector(\'.tox-statusbar__text-container\').insertAdjacentHTML(\'afterbegin\',\'<span id="fuck_info" style="display:flex;flex:1 1 auto;"><a href="javascript:;" onclick="fuck_list();"><span id="fuck_info_rest" style="color:blue;">0</span>&nbsp;/&nbsp;<span id="fuck_info_done" style="color:green;">0</span>&nbsp;/&nbsp;<span id="fuck_info_fail" style="color:red;">0</span></a>&nbsp;&nbsp;<a id="fuck_proc" href="javascript:;" style="color:darkorange;"></a></span>\');};
+if(!document.querySelector(\'#fuck_list\')){document.querySelector(\'.tox-tinymce\').insertAdjacentHTML(\'afterend\',\'<div id="fuck_list" style="margin-top:-1px;padding:2px 8px;border:1px solid #ccc;background:#FFF;color:rgba(34,47,62,.7);font-size:12px;max-height:112px;overflow-y:scroll;display:none;"></div>\');}
+});
+},
+'.(empty($fuck['moreset'])?'':$fuck['moreset']).'
+});
+});
+</script>
+<script src="'.$fuck['tinymce'].'/tinymce.min.js"></script>
+<script src="plugin/fuck/tinymce.fuck.js?'.str_replace('.','',kv_get('fucked')).'"></script>
+'.(empty($fuck['rape'])?'':'<script src="plugin/fuck/tinymce.rape.js?'.str_replace('.','',kv_get('fucked')).'"></script>').'
+');
+?>
