@@ -42,10 +42,10 @@ if(fuck_pool[key].now=='wait'){ikey=key;fuck_pool[ikey].now='proc';break;};
 }
 else{fuck_pool[ikey].now='solo';solo=true;};
 if(ikey===null){console.log(fuck_pool);return;};
-if(fuck_rape){
+if(fuck_rape&&fuck_pool[ikey].act=='image'){
 new Rape(fuck_pool[ikey].src,fuck_rape).conv().then((res)=>{if(fuck_image_arr.indexOf('.'+res.format)<0){fuck_fail({"shit":"type"},ikey,solo,call);return;};fuck_auth(res.canvas,ikey,call);}).catch((err)=>{fuck_fail({"shit":"rape"},ikey,solo,call);console.log('RAPE:'+err);});
 }
-else if(typeof(fuck_pool[ikey].src)=='string' && fuck_pool[ikey].src.match(/^blob:/)){
+else if(typeof(fuck_pool[ikey].src)=='string'&&fuck_pool[ikey].src.match(/^blob:/)){
 var suck=new XMLHttpRequest;
 suck.responseType='blob';
 suck.onerror=function(e){fuck_fail({"shit":"suck"},ikey,solo,call);};
@@ -72,7 +72,7 @@ var suck=new XMLHttpRequest();
 suck.open('POST','./?fuck_auth&act='+fuck_pool[ikey].act,true);
 suck.onerror=function(e){fuck_fail({"shit":"suck"},ikey,solo,call);};
 suck.onreadystatechange=function(e){
-if(this.readyState===4 && this.status===200){
+if(this.readyState===4&&this.status===200){
 var cunt=JSON.parse(this.responseText);
 if(cunt['shit']=='done'){fuck_save(file,ikey,call);}
 else{fuck_fail(cunt,ikey,solo,call);};
@@ -91,7 +91,7 @@ suck.onerror=function(e){fuck_fail({"shit":"suck"},ikey,solo,call);};
 suck.upload.onprogress=function(e){
 if(!e.lengthComputable){return;};
 var prog=parseInt(99*e.loaded/e.total)+'%';
-if(solo && document.querySelector('#fuck_solo')){
+if(solo&&document.querySelector('#fuck_solo')){
 document.querySelector('#fuck_solo').innerHTML='<span style="color:darkorange;">['+prog+']</span>';
 document.querySelector('#fuck_solo').setAttribute('onclick','fuck_stop('+ikey+');');
 };
@@ -99,7 +99,7 @@ document.querySelector('#fuck_file_'+ikey).innerHTML='<span style="color:darkora
 fuck_proc(false);
 };
 suck.onreadystatechange=function(e){
-if(this.readyState===4 && this.status===200){
+if(this.readyState===4&&this.status===200){
 delete fuck_pool[ikey].xhr;
 var cunt=JSON.parse(this.responseText);
 if(cunt['shit']=='done'){fuck_done(cunt,ikey,solo,call);}
@@ -117,12 +117,12 @@ default:
 cunt['file']='upload/attach/'+cunt['date']+'/'+cunt['user']+'_'+cunt['time']+'.'+cunt['type'];
 break;
 };
-if(typeof(fuck_pool[ikey].src)=='string' && fuck_pool[ikey].src.match(/^blob:/)){
+if(typeof(fuck_pool[ikey].src)=='string'&&fuck_pool[ikey].src.match(/^blob:/)){
 for(var obj of tinymce.activeEditor.dom.select('img[src="'+fuck_pool[ikey].src+'"]')){obj.style.opacity='';};
 fuck_pool[ikey].src=cunt['file'];
 if(call){call(fuck_pool[ikey].src);};
 }
-else if(solo && document.querySelector('#fuck_solo')){
+else if(solo&&document.querySelector('#fuck_solo')){
 document.querySelector('#fuck_solo').innerHTML='<span style="color:green;">[完成]</span>';
 document.querySelector('#fuck_solo').removeAttribute('onclick');
 fuck_pool[ikey].src=cunt['file'];
@@ -140,10 +140,10 @@ if(!solo){fuck_deal(null);};
 };
 function fuck_fail(cunt,ikey,solo,call){
 fuck_pool[ikey].now=cunt['shit'];
-if(typeof(fuck_pool[ikey].src)=='string' && fuck_pool[ikey].src.match(/^blob:/)){
+if(typeof(fuck_pool[ikey].src)=='string'&&fuck_pool[ikey].src.match(/^blob:/)){
 if(call){call(fuck_pool[ikey].src);};
 }
-else if(solo && document.querySelector('#fuck_solo')){
+else if(solo&&document.querySelector('#fuck_solo')){
 document.querySelector('#fuck_solo').innerHTML='<span style="color:red;">[错误]</span>';
 document.querySelector('#fuck_solo').setAttribute('onclick','fuck_exec('+ikey+');');
 };

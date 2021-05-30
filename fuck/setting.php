@@ -7,6 +7,7 @@ $post['tidyicon']=param('tidyicon',0);
 $post['noautowh']=param('noautowh',0);
 $post['inner_style']=trim(preg_replace('/\s(?=\s)/','\\1',param('inner_style','',false)));
 $post['outer_style']=trim(preg_replace('/\s(?=\s)/','\\1',param('outer_style','',false)));
+$post['postprocess']=trim(preg_replace('/\s(?=\s)/','\\1',param('postprocess','',false)));
 $post['prism']=trim(param('prism'),'/ ');
 $post['plugins']=trim(param('plugins'));
 $post['toolbar']=trim(param('toolbar'));
@@ -68,8 +69,8 @@ echo '
 <div><b>TinyMCE</b>（编辑器调用，<a href="https://github.com/tinymce/tinymce/releases" target="_blank">最新版本号</a>）</div>
 <div>'.form_text('tinymce',empty($fuck['tinymce'])?'':$fuck['tinymce']).'</div>
 <div>https://cdn.jsdelivr.net/npm/tinymce</div>
-<div>https://cdn.staticfile.org/tinymce/5.7.0</div>
-<div>https://cdn.bootcss.com/tinymce/5.7.0</div>
+<div>https://cdn.staticfile.org/tinymce/5.8.1</div>
+<div>https://cdn.bootcss.com/tinymce/5.8.1</div>
 <hr />
 <div><b>缩进工具栏</b>（编辑器样式更协调）</div>
 <div>'.form_radio_yes_no('tidyicon',empty($fuck['tidyicon'])?0:1).'</div>
@@ -94,6 +95,10 @@ echo '
 <div>.message pre[class^=language-]{padding:8px 12px !important;background:#DDD !important;}/*代码示例简易样式*/</div>
 <div>.message iframe[src^="//music.163.com/"]{height:86px !important;}.message iframe[src^="https://h5.xiami.com/"]{height:110px !important;}/*音频嵌入高度修正*/</div>
 <div>@media(min-width:1000px){.message iframe[src^="//player.bilibili.com/"],.message iframe[src^="https://v.qq.com/"],.message iframe[src^="https://tv.sohu.com/"],.message iframe[src^="https://player.youku.com/"]{width:600px !important;height:400px !important;}}@media(max-width:1000px){.message iframe[src^="//player.bilibili.com/"],.message iframe[src^="https://v.qq.com/"],.message iframe[src^="https://tv.sohu.com/"],.message iframe[src^="https://player.youku.com/"]{width:100% !important;height:50vw !important;}}/*视频嵌入宽高统一*/</div>
+<hr />
+<div><b>粘贴回调</b>（内容处理JS）</div>
+<div>'.form_textarea('postprocess',empty($fuck['postprocess'])?'':$fuck['postprocess']).'</div>
+<div>for(let row of args.node.getElementsByTagName("a")){row.target="_blank";};/*统一链接指向新窗口*/</div>
 <hr />
 <div><b>Prism代码高亮</b>（留空不启用，<a href="https://github.com/PrismJS/prism/releases" target="_blank">最新版本号</a>）</div>
 <div>'.form_text('prism',empty($fuck['prism'])?'':$fuck['prism']).'</div>
