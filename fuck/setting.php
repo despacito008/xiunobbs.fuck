@@ -66,11 +66,10 @@ echo '
 <div><b>屌丝论坛</b>：<a href="https://assbbs.com" target="_blank">https://assbbs.com</a></div>
 </span>
 <span id="fuck_basic" style="display:none;">
-<div><b>TinyMCE</b>（编辑器调用，<a href="https://github.com/tinymce/tinymce/releases" target="_blank">最新版本号</a>）</div>
+<div><b>TinyMCE</b>（编辑器调用地址）</div>
 <div>'.form_text('tinymce',empty($fuck['tinymce'])?'':$fuck['tinymce']).'</div>
 <div>https://cdn.jsdelivr.net/npm/tinymce</div>
-<div>https://cdn.staticfile.org/tinymce/5.8.1</div>
-<div>https://cdn.bootcss.com/tinymce/5.8.1</div>
+<div>https://unpkg.com/tinymce</div>
 <hr />
 <div><b>缩进工具栏</b>（编辑器样式更协调）</div>
 <div>'.form_radio_yes_no('tidyicon',empty($fuck['tidyicon'])?0:1).'</div>
@@ -100,11 +99,10 @@ echo '
 <div>'.form_textarea('postprocess',empty($fuck['postprocess'])?'':$fuck['postprocess']).'</div>
 <div>for(let row of args.node.getElementsByTagName("a")){row.target="_blank";};/*统一链接指向新窗口*/</div>
 <hr />
-<div><b>Prism代码高亮</b>（留空不启用，<a href="https://github.com/PrismJS/prism/releases" target="_blank">最新版本号</a>）</div>
+<div><b>Prism代码高亮</b>（留空不启用）</div>
 <div>'.form_text('prism',empty($fuck['prism'])?'':$fuck['prism']).'</div>
 <div>https://cdn.jsdelivr.net/npm/prismjs</div>
-<div>https://cdn.staticfile.org/prism/1.23.0</div>
-<div>https://cdn.bootcss.com/prism/1.23.0</div>
+<div>https://unpkg.com/prismjs</div>
 <hr />
 <div><b>自定义插件</b>（不懂留空别乱改）</div>
 <div>'.form_text('plugins',empty($fuck['plugins'])?'':$fuck['plugins']).'</div>

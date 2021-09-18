@@ -29,20 +29,18 @@ function fuck_mode($act){
 switch($act){
 case 'image':return 1;break;
 case 'media':return 2;break;
-//case 'file':return 3;break;
 default:return 0;break;
 }
 };
-function fuck_lash($var){ //正则需要转义，不知道干啥用的
-return str_replace(array('\\','/','[',']','(',')','{','}','.','*','?','+','^','$','|'),array('\\\\','\\/','\\[','\\]','\\(','\\)','\\{','\\}','\\.','\\*','\\?','\\+','\\^','\\$','\\|'),htmlentities($var));
-}
-function fuck_sync($oldhtml,$newhtml){
+function fuck_sync($oldhtml,$newhtml,$pid=0,$tid=0){
 global $db,$fuck;
-$olditem=$oldhtml?(preg_match_all('/\"upload\/attach\/[\w\/]+\/([\d]+_[\d]{13})\./',$oldhtml,$olditem)?array_unique($olditem['1']):array()):array();
-$newitem=$newhtml?(preg_match_all('/\"upload\/attach\/[\w\/]+\/([\d]+_[\d]{13})\./',$newhtml,$newitem)?array_unique($newitem['1']):array()):array();
+$olditem=$oldhtml?(preg_match_all('/\"upload\/attach\/[\w\/]+\/([\d]+_[\d]{13})\./',$oldhtml,$oldfind)?array_unique($oldfind['1']):array()):array();
+$newitem=$newhtml?(preg_match_all('/\"upload\/attach\/[\w\/]+\/([\d]+_[\d]{13})\./',$newhtml,$newfind)?array_unique($newfind['1']):array()):array();
 $sql='';
 foreach(array_diff($olditem,$newitem) as $row){$spl=explode('_',$row);$sql.='UPDATE `'.$db->tablepre.'fuck_file` SET `used`=`used`-1 WHERE `user`='.$spl['0'].' AND `mode` IN (1,2,3) AND `time`='.$spl['1'].';';}
 foreach(array_diff($newitem,$olditem) as $row){$spl=explode('_',$row);$sql.='UPDATE `'.$db->tablepre.'fuck_file` SET `used`=`used`+1 WHERE `user`='.$spl['0'].' AND `mode` IN (1,2,3) AND `time`='.$spl['1'].';';}
+if($pid){$sql.='UPDATE `'.$db->tablepre.'post` SET `images`='.count($newfind['1']).' WHERE `pid`='.$pid.';';}
+if($tid){$sql.='UPDATE `'.$db->tablepre.'thread` SET `images`='.count($newfind['1']).' WHERE `tid`='.$tid.';';}
 if(!empty($sql)){db_exec($sql);}
 }
 function fuck_clean($days){
